@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .bg-one{
+      background-color: silver;
+    }
+    .bg-two {
+      background-color: skyblue;
+    }
+    .bg {
+      width: 600px;
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <script src="../lib/vue.js"></script>
+
+  <div id="app">
+    <button @click="bgType = 'bg-one', isOne = false, isTwo = true">主题1</button>
+    <button @click="bgType = 'bg-two', isOne = true, isTwo = false">主题2</button>
+    <div class="bg" :class="bgType"></div>
+    <div class="bg" :class="{'bg-one': isOne, 'bg-two': isTwo}"></div>
+  </div>
+
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        bgType: '',
+        isOne: false,
+        isTwo: false
+      }
+    })
+  </script>
+</body>
+</html>
