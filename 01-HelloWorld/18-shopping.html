@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  table {
+    border: 1px solid rgb(244, 244, 244);
+    border-collapse: collapse;
+  }
+
+  table th,
+  table td {
+    border: 1px solid rgb(244, 244, 244);
+    text-align: center;
+    height: 50px;
+    min-width: 30px;
+    padding: 0 10px;
+  }
+
+  table th {
+    background-color: rgb(246, 246, 245);
+  }
+
+  table td {
+    background-color: #fff;
+  }
+</style>
+<body>
+  <script src="../lib/vue.js"></script>
+
+  <div id="app">
+    <div v-if="isEmpty">购物车为空</div>
+    <div v-else>
+      <table>
+        <tr>
+          <th v-for="item in title" :key="item">{{ item }}</th>
+        </tr>
+        <tr v-for="(obj, index) in shopping" :key="obj.name">
+          <td>{{ index + 1 }}</td>
+          <td>《{{ obj.name }}》</td>
+          <td>{{ obj.publish }}</td>
+          <td>{{ obj.price | priceString }}</td>
+          <td>
+            <button @click="dec(index)">-</button>
+            {{obj.num}}
+            <button @click="asc(index)">+</button>
+          </td>
+          <td>
+            <button @click="remove(index)">{{ obj.action }}</button>
+          </td>
+        </tr>
+      </table>
+      <div>
+        总价:{{ total | priceString }}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        title: {
+          index: '',
+          name: '书籍名称',
+          publish: '出版日期',
+          price: '价格',
+          num: '购买数量',
+          action: '操作'
+        },
+        shopping: [
+          {
+            name: '算法导论',
+            publish: '20006-9',
+            price: 85,
+            num: 1,
+            action: '移除'
+          },
+          {
+            name: 'UNIX编程艺术',
+            publish: '20006-2',
+            price: 59,
+            num: 1,
+            action: '移除'
+          },
+          {
+            name: '编程珠玑',
+            publish: '20008-10',
+            price: 39,
+            num: 1,
+            action: '移除'
+          },
+          {
+            name: '代码大全',
+            publish: '20006-3',
+            price: 128,
+            num: 1,
+            action: '移除'
+          },
+        ]
+      },
+      computed: {
+        total() {
+          let totalPrice = 0
+          for(let item of this.shopping) {
+            totalPrice += item.num * item.price
+          }
+          return totalPrice
+        },
+        isEmpty() {
+          return this.shopping.length < 1
+        }
+      },
+      methods: {
+        dec(index) {
+          this.shopping[index].num--
+          if (this.shopping[index].num <= 0) {
+            this.remove(index)
+          }
+        },
+        asc(index) {
+          this.shopping[index].num++
+        },
+        remove(index) {
+          this.shopping.splice(index, 1)
+        }
+      },
+      filters: {
+        priceString(price) {
+          return `￥${price.toFixed(2)}`
+        }
+      }
+    })
+  </script>
+  <script>
+    const aaa = [10,20,30,40]
+    console.log(aaa.reduce((total, cur) => total + cur, 0))
+  </script>
+</body>
+</html>

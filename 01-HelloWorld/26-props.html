@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="../lib/vue.js"></script>
+
+  <div id="app">
+    <my-cpn v-bind:title="title" :content="content"></my-cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <h2>{{ title }}</h2>
+      <p>{{ content }}</p>
+    </div>
+  </template>
+
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data() {
+        return {
+          title: '这是标题',
+          content: ['哈哈哈']
+        }
+      },
+      components: {
+        myCpn: {
+          template: '#cpn',
+          props: {
+            title: String,
+            content: {
+              type: Array,
+              default: () => ['哈哈哈'],
+              required: true 
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

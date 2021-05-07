@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="../lib/vue.js"></script>
+
+  <div id="app">
+    <my-cpn :title="title"></my-cpn>
+  </div>
+
+  <template id="myCpn">
+    <div>
+      <h2>{{ title }}</h2>
+      <p>{{ content }}</p>
+    </div>
+  </template>
+
+  <script>
+    const myCpn = Vue.extend({
+      template: '#myCpn',
+      data() {
+        return {
+          title: '标题',
+          content: '内容'
+        }
+      }
+    })
+  </script>
+
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        title: '没错，是标题'
+      },
+      components: {
+        myCpn
+      }
+    })
+  </script>
+</body>
+</html>

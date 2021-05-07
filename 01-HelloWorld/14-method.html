@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="../lib/vue.js"></script>
+
+  <div id="app">
+    <div>{{ fname }} {{ lname }}</div>
+    <div>{{ mname() }}</div>
+    <div>{{ cname }}</div>
+    <div>{{ mname() }}</div>
+    <div>{{ cname }}</div>
+    <div>{{ mname() }}</div>
+    <div>{{ cname }}</div>
+    <div>{{ mname() }}</div>
+    <div>{{ cname }}</div>
+  </div>
+
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        fname: 'methods',
+        lname: 'test'
+      },
+      methods: {
+        mname() {
+          console.log('methods')
+          return this.fname + ' ' + this.lname
+        }
+      },
+      computed: {
+        cname() {
+          console.log('computed')
+          return this.fname + ' ' + this.lname
+        }
+      }
+    })
+  </script>
+</body>
+</html>

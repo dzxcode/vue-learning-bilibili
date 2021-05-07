@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .item {
+      color:red;
+    }
+  </style>
+</head>
+<body>
+  <script src="../lib/vue.js"></script>
+
+  <div id="app">
+    <ul>
+      <li v-for="(fruit, index) in fruits" @click="aaa(index)" :class="{'item': isRed[index]}">{{fruit}}</li>
+    </ul>
+  </div>
+
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        fruits: ['西红柿🍅', '苹果🍎', '西瓜🍉'],
+        tomatoes: true,
+        apple: false,
+        watermelon: false,
+        isRed0: 'item',
+        isRed1: '',
+        isRed2: '',
+        isRed: [true, false, false]
+      },
+      methods: {
+        aaa(index) {
+          const temp = [false, false, false]
+          temp[index] = true
+          this.isRed = temp
+        }
+      }
+    })
+  </script>
+</body>
+</html>
