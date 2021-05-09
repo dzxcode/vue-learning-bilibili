@@ -11,15 +11,8 @@
 
     <div id="app">
       <div>
-        <cpn></cpn>
         <cpn>
-          <template slot-scope="slot">
-            <span v-for="item in slot.data">{{ item }} *</span>
-          </template>
-        </cpn>
-        <cpn></cpn>
-        <cpn>
-          <template slot-scope="slot">
+          <template v-slot="slot">
             <span>{{ slot.data.join(' - ') }}</span>
           </template>
         </cpn>
