@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="../lib/vue.js"></script>
+
+    <div id="app">
+      <div>
+        <cpn></cpn>
+        <cpn>
+          <template slot-scope="slot">
+            <span v-for="item in slot.data">{{ item }} *</span>
+          </template>
+        </cpn>
+        <cpn></cpn>
+        <cpn>
+          <template slot-scope="slot">
+            <span>{{ slot.data.join(' - ') }}</span>
+          </template>
+        </cpn>
+      </div>
+    </div>
+    <script></script>
+
+    <template id="cpn">
+      <div>
+        <h2>子组件</h2>
+        <slot :data="dataList">
+          <ul>
+            <li v-for="item in dataList">{{ item }}</li>
+          </ul>
+        </slot>
+      </div>
+    </template>
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data: {},
+        components: {
+          cpn: {
+            template: '#cpn',
+            data() {
+              return {
+                dataList: ['aaa', 'bbb', 'ccc']
+              }
+            }
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
